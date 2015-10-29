@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project name="YetAnotherChessGame" default="dist" basedir=".">
+  <description>
+    Construit Yet Another Chess Game
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="icons" location="src/icons"/>
+
+  <target name="init">	 
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>    
+    <!-- Copie les images -->    
+    <copy todir="${build}/icons" >
+    	<fileset dir="${icons}" >
+		<include name="**/*.png"/>
+	</fileset>
+    </copy>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution">
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/YetAnotherChessGame-${DSTAMP}.jar" basedir="${build}"/>
+  
+
+    <!-- Fancy task that takes the pain out creating properly formatted manifest value -->
+    <manifestclasspath property="mf.classpath" jarfile="${dist}/lib/YetAnotherChessGame.jar">
+        <classpath>
+            <fileset dir="${dist}/lib" includes="*.jar"/>
+        </classpath><!--end tag-->
+    </manifestclasspath>
+
+    <!-- This is the executable jar -->
+    <jar jarfile="${dist}/lib/YetAnotherChessGame.jar" basedir="${build}">
+        <manifest>
+            <attribute name="Main-Class" value="gui.YetAnotherChessGame"/>
+            <attribute name="Class-Path" value="${mf.classpath}"/> 
+        </manifest>
+    </jar>
+</target>
+
+  <target name="clean"
+        description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
+
+
