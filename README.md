@@ -10,5 +10,6 @@ java -jar dist/lib/YetAnotherChessGame.jar
 
 ## option 2 : classes
 cd build
+
 java gui.YetAnotherChessGame
 
