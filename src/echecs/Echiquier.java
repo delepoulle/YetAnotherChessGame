@@ -899,11 +899,17 @@ public class Echiquier{
                  if (p!=null){
                     System.out.print("Sur la case "+new Position(i,j));                    
                     System.out.print(" il y a "+p+" qui peut aller en ");
-                    
+                   
+                   /* java 1.8 : lambda
                     p.getAccessible().stream().forEach((pos) -> {
                         System.out.print(pos+" ");
                      });
-                    System.out.println();
+                   */
+                   /* java 1.7 */
+                    for (Position pos : p.getAccessible()){
+						System.out.print(pos+" ");
+					}
+					System.out.println();
                  }
                  
             }            
