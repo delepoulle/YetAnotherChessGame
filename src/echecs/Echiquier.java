@@ -36,6 +36,14 @@ public class Echiquier{
             this(8,8);		
     }
 
+    private void vider(){
+        for (int i = 0; i<dimX; i++){
+            for (int j = 0; j<dimY; j++){
+                c[i][j] = new Case();
+            }
+        }
+    }
+    
     
     /**
      * Construit un échiquier de taille spécifiée
@@ -49,11 +57,8 @@ public class Echiquier{
             this.trait = 'w';
 
             c = new Case[dimX][dimY];
-            for (int i = 0; i<dimX; i++){
-                    for (int j = 0; j<dimY; j++){
-                        c[i][j] = new Case();
-                    }
-            }
+            vider();
+
     }
     
     public Echiquier(Echiquier ech){
@@ -127,6 +132,9 @@ public class Echiquier{
      * @param FENcode 
      */
     public void setFEN(String FENcode){
+        
+        //vider l'échiquier
+        vider();
 
         try{
             String[] code = FENcode.split(" ");
