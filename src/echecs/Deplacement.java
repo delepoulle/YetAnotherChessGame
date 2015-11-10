@@ -12,6 +12,17 @@ public class Deplacement {
     private final int y1;
     private final int x2;
     private final int y2;
+    
+    private boolean prise;
+
+    public void setPrise(boolean prise) {
+        this.prise = prise;
+    }
+
+    public void setPromotion(char promotion) {
+        this.promotion = promotion;
+    }
+    private char promotion;
 
     public Deplacement(int x1, int y1, int x2, int y2) {
         this.x1 = x1;
@@ -96,9 +107,19 @@ public class Deplacement {
     }
     
     public String toString(){
-        return (new Position(x1,y1)).toString()
-                +" "
-                +(new Position(x2,y2)).toString();
+        
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append((new Position(x1,y1)).toString());
+        if (prise){
+            sb.append("x");
+        }
+        else{            
+            sb.append("-");
+        }
+        sb.append((new Position(x2,y2)).toString());
+        
+        return sb.toString();
     }
     
 }
