@@ -437,17 +437,20 @@ public class Echiquier{
             
             Piece piece = c[x1][y1].getPiece();
             char codePiece = piece.getCode();
+            d.setPiece(codePiece);
             
             promotion = false;
             // cas du pion noir sur première rangée
             if (codePiece =='p' && (y2==0)){
                 promotion = true;
                 piece=new Piece("dame",'q');
+                d.setPromotion('Q');
             }
             // cas du pion blanc sur dernière rangée
             if (codePiece=='P' && (y2==7)){
                 promotion = true;
                 piece=new Piece("dame",'Q');
+                d.setPromotion('Q');
             }
             
             // autoriser la prise en passant si et seulement si avance de 2 pour un pion
@@ -548,8 +551,10 @@ public class Echiquier{
                 roquek = false;
             }
             
-           //si la case de destination n'est pas vide, il s'agit d'une prise
-            d.setPrise(true);
+           //si la case de destination n'est pas vide, il s'agit d'une prise            
+            if (!c[x2][y2].estVide()){                
+                d.setPrise(true);
+            }
             
             c[x2][y2].setPiece(piece);
             c[x1][y1].vider();              

@@ -16,6 +16,14 @@ public class Deplacement {
     
     private boolean prise;
     
+    private char piece;
+    
+    private char promotion = ' ';
+
+    public void setPromotion(char promotion) {
+        this.promotion = promotion;
+    }
+    
     /**
      * Indique que le mouvement consititue une prise.
      * @param prise vrai si c'est une prise, faux sinon.
@@ -24,6 +32,15 @@ public class Deplacement {
         this.prise = prise;
     }
 
+    /**
+     * Permet d'indiquer le code de la pièce qui se déplace (pour la noation
+     * algébrique)
+     * 
+     * @param piece pièce qui se déplace
+     */
+    public void setPiece(char piece) {
+        this.piece = piece;
+    }
     
     
 /**
@@ -186,6 +203,12 @@ public class Deplacement {
         
         StringBuilder sb = new StringBuilder();
         
+        char p = Character.toUpperCase(piece);
+        
+        if (p !='P'){
+            sb.append(p);
+        }
+        
         sb.append((new Position(x1,y1)).toString());
         if (prise){
             sb.append("x");
@@ -194,6 +217,10 @@ public class Deplacement {
             sb.append("-");
         }
         sb.append((new Position(x2,y2)).toString());
+        
+        if (promotion != ' '){
+            sb.append(promotion);
+        }
         
         return sb.toString();
     }

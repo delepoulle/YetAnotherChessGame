@@ -13,7 +13,10 @@ import echecs.Deplacement;
 import echecs.Echiquier;
 import echecs.Piece;
 import echecs.Position;
+import java.util.logging.Logger;
 
+
+ 
 
 /**
  *  Classe principale pour l'interface graphique.
@@ -44,7 +47,9 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
   /** L'échiquier courrant */
   static Echiquier ech;
   
-  
+  /** Pour les logs */
+ private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
   
   /** Efface tout l'échiquier */
   private void videEchiquier(){
@@ -91,7 +96,10 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
     /**
      * Constructeur
      */
-    public YetAnotherChessGame() {
+    public YetAnotherChessGame() {  
+        
+        LOGGER.info("Démarrage de l'application");
+        
         Dimension boardSize = new Dimension(600, 600);
 
         //  Use a Layered Pane for this this application
@@ -122,7 +130,7 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
         }
 
         dessineToutesLesPieces();
-
+        
   }
  
     
@@ -186,10 +194,13 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
         //System.out.println("==> Déplacement : "+d);
         
         
+        
+        
         if (ech.estValideDeplacement(d)){
             
             ech.executeDeplacement(d);
-        
+            LOGGER.info(d.toString());
+            
             Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
             
             
