@@ -3,7 +3,7 @@ package echecs;
 
 
 /**
- *
+ * Représente une position sur un échiquier (colonne, ligne)
  * @author samuel
  */
 public class Position {

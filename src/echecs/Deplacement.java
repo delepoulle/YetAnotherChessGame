@@ -3,7 +3,8 @@ package echecs;
 
 
 /**
- * Représentation d'un déplacement
+ * Représentation d'un déplacement.
+ * 
  * @author samuel
  */
 public class Deplacement {

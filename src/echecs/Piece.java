@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 /**
  *
+ * Représente une pièce du jeu d'échec.
+ * 
  * @author samuel
  */
 

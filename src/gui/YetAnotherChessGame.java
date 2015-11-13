@@ -16,7 +16,7 @@ import echecs.Position;
 
 
 /**
- *  Classe principale pour l'interface graphique
+ *  Classe principale pour l'interface graphique.
  * 
  * @author samuel
  */

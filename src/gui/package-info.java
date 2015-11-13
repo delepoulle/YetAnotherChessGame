@@ -1,4 +1,4 @@
 /**
- * le package gui contient l'interface graphique du jeu d'échecs
+ * le package gui contient l'interface graphique du jeu d'échecs.
  */
 package gui;

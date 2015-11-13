@@ -3,7 +3,8 @@ package echecs;
 
 
 /**
- *
+ * Représente l'échiquer. C'est un ensemble de cases avec des pièces dessus.
+ *  
  * @author samuel
  */
 

@@ -19,7 +19,7 @@ see http://www.wtfpl.net/txt/copying/ for no more detail.
 */
 
 /**
- *
+ * Classe principale pour tester les comportements.
  * @author Samuel Delepoulle 
  * <A HREF="mailto:delepoulle@lisic.univ-littoral.fr">Samuel Delepoulle</A>
  */

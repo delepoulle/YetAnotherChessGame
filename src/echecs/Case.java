@@ -2,7 +2,7 @@ package echecs;
 
 /**
  *
- * Représente une case du jeu
+ * Représente une case du jeu.
  * 
  * @author samuel
  */
