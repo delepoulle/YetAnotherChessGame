@@ -2,6 +2,8 @@ package echecs;
 
 /**
  *
+ * Représente une case du jeu
+ * 
  * @author samuel
  */
 

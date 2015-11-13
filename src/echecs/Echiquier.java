@@ -47,8 +47,8 @@ public class Echiquier{
     
     /**
      * Construit un échiquier de taille spécifiée
-     * @param dimX
-     * @param dimY 
+     * @param dimX nombre de colonnes souhaitées
+     * @param dimY nombre de lignes souhaitées
      */
     public Echiquier(int dimX, int dimY){
             this.dimX = dimX;
@@ -61,6 +61,11 @@ public class Echiquier{
 
     }
     
+    
+    /**
+     * Construit un échiquier par recopie.
+     * @param ech un autre échiquier
+     */
     public Echiquier(Echiquier ech){
         this.dimX = ech.dimX;
         this.dimY = ech.dimY;
@@ -74,26 +79,58 @@ public class Echiquier{
             }               
     }
     
-    public Piece getPieceCase(int i, int j){        
-        return c[i][j].getPiece();        
+    /**
+     * Retourne la pièce qui est dans la case x,y. Null si vide.
+     * @param x colonne
+     * @param y ligne
+     * @return la pièce qui est dans la case x,y. 
+     */
+    public Piece getPieceCase(int x, int y){        
+        return c[x][y].getPiece();        
     }
-    
+
+   /**
+    * Retourne la pièce qui est dans la case p. Null si vide.
+    * @param p case
+    * @return la pièce qui est dans la case p.
+    */
     public Piece getPieceCase(Position p){
         return c[p.getX()][p.getY()].getPiece();        
     }
     
+    
+    /**
+     * Indique si la case est vide ou non.
+     * @param p case
+     * @return un booléen vrai si la case est vide (ne contient pas de pièce)
+     */
     public boolean estVideCase(Position p){
         return getPieceCase(p) == null;
     }
 
+    /**
+     * nombre de colonnes de l'échiquier
+     * @return nombre de colonnes.
+     */
     public int getDimX() {
         return dimX;
     }
 
+
+    /**
+     * nombre de ligne de l'échiquier.
+     * @return nombre de ligne.
+     */
     public int getDimY() {
         return dimY;
     }
 
+    /**
+     * Retourne la case en fonction de ses coordonnées
+     * @param i colonne
+     * @param j ligne
+     * @return la case
+     */
     public Case getCase(int i, int j) {
         return c[i][j];
     }
@@ -121,16 +158,23 @@ public class Echiquier{
         return c[x][y].getPiece();
     }
     
-    
+    /**
+     * Indique la pièce qui dans la case de position p
+     * @param p position de la case
+     * @return la pièce contenue (null si vide).
+     */
     public Piece getPiece(Position p){
         return getPiece(p.getX(),p.getY());
     }
 
     
     /**
-     * Entrée du code FEN
-     * @param FENcode 
+     * Lecture d'un code FEN
+     * @see <a href="https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards">
+     *      https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards</a>
+     * @param FENcode code à lire
      */
+    
     public void setFEN(String FENcode){
         
         //vider l'échiquier
@@ -211,10 +255,13 @@ public class Echiquier{
     }
 
     /**
-     * Sortie fen
+     * Ecriture du code FEN qui représente la position de l'échiquier
+     * @see <a href="https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards">
+     *      https://fr.wikipedia.org/wiki/Notation_Forsyth-Edwards</a>
      * 
      * @return chaine fen qui représente l'échiquier
      */
+    
     public String getFEN(){
         String res = "";
 
@@ -264,7 +311,7 @@ public class Echiquier{
     }
 
     /**
-     * Sortie texte
+     * Sortie texte sous forme simplifiée 
      * @return chaine de caractère qui représente l'échiquier
      */
     @Override
@@ -280,20 +327,12 @@ public class Echiquier{
     }
    
     
-    /*
-    private boolean estValideDeplacementTour(Deplacement d){
-        // déplacement sur une colonne
-        if (Geometrie.estSurColonne(d)){
-            int pas = (d.getY1() > d.getY2() ) ? 1 : -1;
-            
-            
-            
-            for (y=d.getY1()+pas; y!=getY2; y+=pas)
-        }
-    }*/
+
 
     /**
-     * Méthode qui indique si un déplacement est valide ou non
+     * Méthode qui indique si un déplacement est valide ou non. La méthode indique
+     * simplement si le déplacement respecte les règles. L'échiquier est
+     * laissé dans l'état. Le déplacement n'est pas effectué.
      * 
      * @param d Deplacement
      * @return true si valide sur l'echiquier false sinon
@@ -378,7 +417,10 @@ public class Echiquier{
 
     
     /**
-     * Execute le déplacement (après avoir vérifié sa validité)
+     * Execute le déplacement (après avoir vérifié sa validité).
+     * 
+     * Après contrôle de validité du déplacement, il est effectué. L'état
+     * de l'échiquier est donc changé.
      * 
      * 
      * @param d déplacement à executer
@@ -505,7 +547,9 @@ public class Echiquier{
                 roquek = false;
             }
             
-           
+           //si la case de destination n'est pas vide, il s'agit d'une prise
+            d.setPrise(true);
+            
             c[x2][y2].setPiece(piece);
             c[x1][y1].vider();              
            
@@ -514,17 +558,18 @@ public class Echiquier{
         // on change le trait
         trait = (trait=='w' ? 'b' : 'w');
         
-        construitPositionsAccessibles ();
+        construitPositionsAccessibles();
         
         System.out.println(this.getFEN());
     }
     
-    /** effectue un déplacement sans contrôle de validité 
+    /** Effectue un déplacement sans aucun contrôle de validité.
+     * Ceci permet de faire des vérifications (pour le roque, par exemple) 
      *  
      * 
      * @param d Déplacement qui doit être effectué
      */
-    public void forceDeplacement(Deplacement d){
+    private void forceDeplacement(Deplacement d){
         int x1 = d.getX1();
         int y1 = d.getY1();
         int x2 = d.getX2();
@@ -537,10 +582,12 @@ public class Echiquier{
     
     
     /**
-     * Retourne un échiquier sur lequel le déplacement a été réalisé
+     * Retourne un échiquier sur lequel le déplacement a été réalisé.
+     * Ceci permet de ne pas modifier l'état de l'échiquier. 
+     * Les contrôles de validité du déplacement sont effectués.
      * 
-     * @param d
-     * @return 
+     * @param d le déplacement
+     * @return une instance d'échiquier sur lequel le déplacement a été réalisé.
      */
     public Echiquier simuleDeplacement(Deplacement d){
         Echiquier ech = new Echiquier(this);
@@ -566,7 +613,7 @@ public class Echiquier{
      * Execute le déplacement (après avoir vérifié sa validité).
      * La chaine de caractère représente le dépoe
      * 
-     * @param s 
+     * @param s déplacement donné en notation algébrique.
      */
     public void executeDeplacement(String s){
         executeDeplacement(new Deplacement(s));
@@ -575,11 +622,15 @@ public class Echiquier{
     
     /**
      * Ajoute à la case toutes les cases qui lui sont accessibles en ligne
-     * droite dans une direction donnée
-     * @param i
-     * @param j
-     * @param di
-     * @param dj 
+     * droite dans une direction donnée. Pour continuer, il faut que la case soit
+     * vide. On s'arrête dès qu'on a rencontré une pièce ou un bord. Si la case est 
+     * occupée par une pièce de couleur opposée, la case est accessible (mais on ne
+     * poursuit pas la recherche).
+     * 
+     * @param i colonne de départ
+     * @param j ligne de départ
+     * @param di déplacement horizontal (nombre signé)
+     * @param dj déplacement vertical (nombre signé)
      */
     public void accessibleEnLigneDroite(int i, int j,int di, int dj){
         
@@ -610,8 +661,60 @@ public class Echiquier{
             }        
         }        
     }
+   
+    
+     /**
+     * Indique si la case existe dans l'échiquier (elle n'est pas en dehors
+     * des limites).
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     * @return vrai si la case existe faux sinon
+     */
+    public boolean existeCase(int i, int j){
+       return  (i>=0 && i<dimX && j>=0 && j<dimY);
+    }
     
     
+    /**
+     * Indique si la case existe dans l'échiquier (elle n'est pas en dehors
+     * des limites) et si elle est inoccupée.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     * @return vrai si la case existe et qu'elle ne contient pas de pièce faux sinon
+     */
+    public boolean existeEtVide(int i, int j){
+        return existeCase(i,j) 
+            && (c[i][j].estVide());
+    }
+   
+    
+     /**
+     * Indique si la case existe dans l'échiquier (elle n'est pas en dehors
+     * des limites) et si elle est libre (c'est à dire vide ou occupée par une
+     * pièce adverse).
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     * @param blanc booléen qui idique la couleur (vrai pour blanc, faux pour noir)
+     * @return vrai si la case existe et qu'elle ne contient pas de pièce de la couleur faux sinon
+     */
+    public boolean existeEtLibre(int i, int j, boolean blanc){
+        // il faut que la case existe, soit libre ou occupée par une pièce 
+        // de couleur différente
+        return existeCase(i,j) 
+            && (c[i][j].estVide() || (c[i][j].getPiece().estBlanc() != blanc));
+    }
+    
+     
+    /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour une tour.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */
     public void accessibleTour(int i, int j){
         accessibleEnLigneDroite(i,j,0,1);
         accessibleEnLigneDroite(i,j,0,-1);
@@ -619,7 +722,13 @@ public class Echiquier{
         accessibleEnLigneDroite(i,j,-1,0);
     }
 
-    
+     /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour un fou.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */   
     public void accessibleFou(int i, int j){
         accessibleEnLigneDroite(i,j,1,1);
         accessibleEnLigneDroite(i,j,-1,-1);
@@ -628,24 +737,13 @@ public class Echiquier{
     }
     
     
-    public boolean existeCase(int i, int j){
-       return  (i>=0 && i<dimX && j>=0 && j<dimY);
-    }
-    
-    public boolean existeEtVide(int i, int j){
-        return existeCase(i,j) 
-            && (c[i][j].estVide());
-    }
-    
-    public boolean existeEtLibre(int i, int j, boolean blanc){
-        // il faut que la case existe, soit libre ou occupée par une pièce 
-        // de couleur différente
-        return existeCase(i,j) 
-            && (c[i][j].estVide() || (c[i][j].getPiece().estBlanc() != blanc));
-    }
-    
-    
-    
+     /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour un cavalier.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */   
     public void accessibleCavalier(int i, int j){
         boolean blanc = c[i][j].getPiece().estBlanc();
         
@@ -685,7 +783,13 @@ public class Echiquier{
         
     }
     
-    
+     /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour un roi.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */   
     public void accessibleRoi(int i, int j){
         boolean blanc = c[i][j].getPiece().estBlanc();
         
@@ -733,7 +837,13 @@ public class Echiquier{
         }
     }
     
-    
+     /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour un pion blanc.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */   
     public void accessiblePionBlanc (int i, int j){
         
         
@@ -793,6 +903,14 @@ public class Echiquier{
         
     }
     
+    
+     /**
+     * Ajoute à la liste des positions accessibles, les cases de déplacement 
+     * valides pour un pion noir.
+     * 
+     * @param i colonne de la case de départ
+     * @param j ligne de la case de départ
+     */   
     public void accessiblePionNoir (int i, int j){
                
         if (existeEtVide(i,j-1)){
@@ -852,7 +970,9 @@ public class Echiquier{
     }
     
     /**
-     * est accessible "naivement" (sans vérification de l'échec)
+     * Constuit pour toutes les pièces la liste de leur 
+     * positions accessibles . Elle est construite "naivement" 
+     * (c'est à dire sans vérification de l'échec)
      * 
      * 
      */
@@ -899,6 +1019,10 @@ public class Echiquier{
     }
         
     
+    
+    /** Permet d'afficher toutes les pièces avec leur
+     * position accessibles.
+     */
     public void affichePositionAccessibles (){
         for (int j = 0; j<dimY; j++){
             for (int i = 0; i<dimX; i++){                        
@@ -931,7 +1055,7 @@ public class Echiquier{
      * Vérifie si le joueur est en échec ou non. On suppose que la liste des positions
      * possibles pour les pièces sont déjà calculées
      * @param couleur couleur du joueur
-     * @return 
+     * @return vrai si le joueur est en échec, faux sinon.
      */
     public boolean estEnEchec(char couleur){
         Position pos = rechercheRoi(couleur);
@@ -957,9 +1081,11 @@ public class Echiquier{
     }
     
     /**
-     * Recherche la position du roi d'une couleur (on suppose qu'elle existe tjs)
-     * @param couleur
-     * @return 
+     * Recherche la position du roi d'une couleur (on suppose qu'il y a
+     * un et un seul roi).
+     * 
+     * @param couleur couleur du roi
+     * @return Position du roi de la couleur
      */
     public Position rechercheRoi(char couleur){
         
@@ -978,18 +1104,36 @@ public class Echiquier{
         return null;
     }
 
+    /**
+     * Indique si le dernier mouvement est une promotion
+     * @return vrai si le dernier mouvement est une promotion
+     */
     public boolean isPromotion() {
         return promotion;
     }
 
+    /** Indique si le dernier mouvement est un petit roque
+     * 
+     * @return vrai si le dernier mouvement était un petit roque
+     */
     public boolean petitRoqueEnCours() {        
         return petitRoqueEnCours;
     }
     
+    
+    /** Indique si le dernier mouvement est un grand roque
+     * 
+     * @return vrai si le dernier mouvement était un grand roque
+     */
     public boolean grandRoqueEnCours() {        
         return grandRoqueEnCours;
     }
     
+    
+    /**
+     * Indique si le dernier mouvement est une prise en passant
+     * @return vrai si le dermier mouvement était une prise en passant
+     */
     public boolean priseEnPassantEnCours(){
         return priseEnPassantEnCours;
     }

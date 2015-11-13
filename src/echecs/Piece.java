@@ -14,7 +14,7 @@ public class Piece{
 	private char code;
         private String couleur;
         
-        ArrayList<Position> accessible = new ArrayList<>();
+        private ArrayList<Position> accessible = new ArrayList<>();
 	
         /**
          * Définit une pièce en fonction de son non, son code et 
@@ -29,8 +29,13 @@ public class Piece{
                 couleur = (Character.isUpperCase(code)) ? "blanc" : "noir";
 	}
         
+        
+        /**
+         * Construit une pièce par recopie
+         * @param p une autre pièce
+         */
         Piece(Piece p){
-            this.nom = new String(p.nom);
+            this.nom = p.nom;
             this.code = p.code;
             this.couleur = new String(p.couleur);
         }
@@ -43,6 +48,11 @@ public class Piece{
 		return nom+"_"+couleur;
 	}
         
+        
+        /**
+         * Retourne la couleur de la pièce
+         * @return 'w' si la pièce est blanche 'b' sinon
+         */
         public char getColor(){
             return couleur.equals("blanc") ? 'w' : 'b';
         }
@@ -58,7 +68,7 @@ public class Piece{
         
         /**
          * Retroune vrai si la pièce est blanche faux sinon
-         * @return 
+         * @return vrai si la pièce est blanche faux sinon
          */
         public boolean estBlanc(){
             return (couleur.equals("blanc"));
@@ -66,7 +76,7 @@ public class Piece{
         
         /**
          * Retroune vrai si la pièce est noire faux sinon
-         * @return 
+         * @return vrai si la pièce est noire faux sinon
          */
         public boolean estNoir(){
             return (couleur.equals("noir"));
@@ -74,20 +84,33 @@ public class Piece{
         
         /**
          * Chaine de caractères qui représenta la pièce
-         * @return 
+         * @return code de la pièce
          */
         public String toString(){
             return Character.toString(code); 
         }
         
+        
+        /**
+         * ajoute une case accessible à la pièce
+         * @param p une position accessible
+         */
         public void addCaseAccessible(Position p){
             accessible.add(p);            
         }
-
+        
+        
+        /**
+         * Retourne la liste des positions possibles d'une pièce
+         * @return liste des positions accessibles
+         */
     public ArrayList<Position> getAccessible() {
         return accessible;
     }
     
+    /**
+     * Vide la liste des positions accessibles.
+     */
     public void videAccessible(){
         accessible = new ArrayList<>();
     }

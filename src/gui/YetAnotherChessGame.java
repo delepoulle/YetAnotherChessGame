@@ -128,7 +128,7 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
     
     /** 
      * Méthode appelée lorsque la souris est cliquée
-     * @param e 
+     * @param e Evenement souris
      */
   @Override
     public void mousePressed(MouseEvent e) {
@@ -159,7 +159,7 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
   * Méthode appelée lorsque la souris est déplacée (pour que la pièce suive le
   * mouvement de la souris).
   * 
-  * @param me 
+  * @param me Evenement souris
   */
   @Override
     public void mouseDragged(MouseEvent me) {
@@ -172,7 +172,7 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
   /** 
    * Méthode qui permet de reposer une pièce sur l'échiquier.
    * 
-   * @param e 
+   * @param e evenement souris
    */
   @Override
   public void mouseReleased(MouseEvent e) {

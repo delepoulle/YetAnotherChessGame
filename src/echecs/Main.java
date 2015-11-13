@@ -20,7 +20,8 @@ see http://www.wtfpl.net/txt/copying/ for no more detail.
 
 /**
  *
- * @author Samuel Delepoulle <delepoulle@lisic.univ-littoral>
+ * @author Samuel Delepoulle 
+ * <A HREF="mailto:delepoulle@lisic.univ-littoral.fr">Samuel Delepoulle</A>
  */
 public class Main {
     public static void main(String[] args){
