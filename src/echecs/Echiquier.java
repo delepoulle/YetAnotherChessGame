@@ -442,14 +442,14 @@ public class Echiquier{
             // cas du pion noir sur première rangée
             if (codePiece =='p' && (y2==0)){
                 promotion = true;
-                piece=new Piece("dame",Character.toLowerCase(choixPromotion));
-                d.setPromotion('Q');
+                piece=new Piece(Character.toLowerCase(choixPromotion));
+                d.setPromotion(choixPromotion);
             }
             // cas du pion blanc sur dernière rangée
             if (codePiece=='P' && (y2==7)){
                 promotion = true;
-                piece=new Piece("dame",'Q');
-                d.setPromotion('Q');
+                piece=new Piece(choixPromotion);
+                d.setPromotion(choixPromotion);
             }
             
             // autoriser la prise en passant si et seulement si avance de 2 pour un pion
