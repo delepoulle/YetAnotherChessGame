@@ -51,7 +51,7 @@ public class Piece{
             }
             
             if (couleurMaj == 'Q'){
-                nom="reine";                
+                nom="dame";                
             }            
             
             if (couleurMaj == 'R'){
