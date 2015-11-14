@@ -32,7 +32,10 @@ class Case{
             this.contenu = null;
 	}
         
-
+        /**
+         * Recopie une case existante.
+         * @param c une autre case.
+         */
         public Case(Case c){
             if (c.contenu == null){
                 this.contenu = null;

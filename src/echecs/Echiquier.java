@@ -202,24 +202,7 @@ public class Echiquier{
                     }else{     
                         int pos = j+(decal); 
                         
-                        c[pos][dimY-i-1].setPiece(new Piece(l));
-                        
-                        /*
-                        switch (l){
-                            case 'k' : c[pos][dimY-i-1].setPiece(new Piece("roi",'k')); break;
-                            case 'K' : c[pos][dimY-i-1].setPiece(new Piece("roi",'K')); break;
-                            case 'q' : c[pos][dimY-i-1].setPiece(new Piece("dame",'q')); break;
-                            case 'Q' : c[pos][dimY-i-1].setPiece(new Piece("dame",'Q')); break;   
-                            case 'r' : c[pos][dimY-i-1].setPiece(new Piece("tour",'r')); break;
-                            case 'R' : c[pos][dimY-i-1].setPiece(new Piece("tour",'R')); break;
-                            case 'b' : c[pos][dimY-i-1].setPiece(new Piece("fou",'b')); break;
-                            case 'B' : c[pos][dimY-i-1].setPiece(new Piece("fou",'B')); break;  
-                            case 'n' : c[pos][dimY-i-1].setPiece(new Piece("cavalier",'n')); break;
-                            case 'N' : c[pos][dimY-i-1].setPiece(new Piece("cavalier",'N')); break;                                          
-                            case 'p' : c[pos][dimY-i-1].setPiece(new Piece("pion",'p')); break;
-                            case 'P' : c[pos][dimY-i-1].setPiece(new Piece("pion",'P')); break;  
-
-                        }*/
+                        c[pos][dimY-i-1].setPiece(new Piece(l));                       
                     }                                                                                               
                 }
             }	
@@ -259,6 +242,16 @@ public class Echiquier{
        
         construitPositionsAccessibles ();
         
+    }
+
+    
+    /** Permet de choisir la pièce de promotion.
+     * 
+     * 
+     * @param choixPromotion code de la pièce de promotion
+     */
+    public void setChoixPromotion(char choixPromotion) {
+        this.choixPromotion = choixPromotion;
     }
 
     /**
