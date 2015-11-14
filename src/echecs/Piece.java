@@ -58,7 +58,7 @@ public class Piece{
                 nom="tour";                
             }            
             
-            if (couleurMaj == 'K'){
+            if (couleurMaj == 'N'){
                 nom="cavalier";                
             }             
                         
@@ -69,6 +69,8 @@ public class Piece{
             if (couleurMaj == 'P'){
                 nom="pion";                
             }
+            
+            
             
             
         }

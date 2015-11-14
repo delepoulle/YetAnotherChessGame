@@ -200,7 +200,11 @@ public class Echiquier{
                     if (Character.isDigit(l)){
                         decal += (Character.getNumericValue(l)-1);
                     }else{     
-                        int pos = j+(decal);                                                
+                        int pos = j+(decal); 
+                        
+                        c[pos][dimY-i-1].setPiece(new Piece(l));
+                        
+                        /*
                         switch (l){
                             case 'k' : c[pos][dimY-i-1].setPiece(new Piece("roi",'k')); break;
                             case 'K' : c[pos][dimY-i-1].setPiece(new Piece("roi",'K')); break;
@@ -215,7 +219,7 @@ public class Echiquier{
                             case 'p' : c[pos][dimY-i-1].setPiece(new Piece("pion",'p')); break;
                             case 'P' : c[pos][dimY-i-1].setPiece(new Piece("pion",'P')); break;  
 
-                        }
+                        }*/
                     }                                                                                               
                 }
             }	
