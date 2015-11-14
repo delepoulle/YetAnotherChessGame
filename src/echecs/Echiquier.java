@@ -27,8 +27,10 @@ public class Echiquier{
     private boolean grandRoqueEnCours = false;
     private boolean priseEnPassantEnCours = false;
     
+    private char choixPromotion = 'Q';
+    
     // position de la prise en passant éventuelle
-    Position priseEnPassant;
+    private Position priseEnPassant;
 
     /**
      * Constructeur par défaut echiquier 8x8
@@ -198,7 +200,7 @@ public class Echiquier{
                     if (Character.isDigit(l)){
                         decal += (Character.getNumericValue(l)-1);
                     }else{     
-                        int pos = j+(decal);
+                        int pos = j+(decal);                                                
                         switch (l){
                             case 'k' : c[pos][dimY-i-1].setPiece(new Piece("roi",'k')); break;
                             case 'K' : c[pos][dimY-i-1].setPiece(new Piece("roi",'K')); break;
@@ -443,7 +445,7 @@ public class Echiquier{
             // cas du pion noir sur première rangée
             if (codePiece =='p' && (y2==0)){
                 promotion = true;
-                piece=new Piece("dame",'q');
+                piece=new Piece("dame",Character.toLowerCase(choixPromotion));
                 d.setPromotion('Q');
             }
             // cas du pion blanc sur dernière rangée

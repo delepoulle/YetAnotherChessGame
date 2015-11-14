@@ -31,13 +31,54 @@ public class Piece{
                 couleur = (Character.isUpperCase(code)) ? "blanc" : "noir";
 	}
         
+        /** Définit une pièce en fonction de son code
+         * 
+         * @param code 
+         */
+        Piece(char code){
+            
+            this.code = code;
+            
+            if (Character.isUpperCase(code)){
+                couleur = "blanc";                
+            }else{
+                couleur = "noir";
+            }
+            char couleurMaj = Character.toUpperCase(code);
+            
+            if (couleurMaj == 'K'){
+                nom="roi";                
+            }
+            
+            if (couleurMaj == 'Q'){
+                nom="reine";                
+            }            
+            
+            if (couleurMaj == 'R'){
+                nom="tour";                
+            }            
+            
+            if (couleurMaj == 'K'){
+                nom="cavalier";                
+            }             
+                        
+            if (couleurMaj == 'B'){
+                nom="fou";                
+            } 
+            
+            if (couleurMaj == 'P'){
+                nom="pion";                
+            }
+            
+            
+        }
         
         /**
          * Construit une pièce par recopie
          * @param p une autre pièce
          */
         Piece(Piece p){
-            this.nom = p.nom;
+            this.nom = new String(p.nom);
             this.code = p.code;
             this.couleur = new String(p.couleur);
         }
