@@ -64,6 +64,20 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
     }
   
   
+  /** Permet de dessiner une pièce sur une case donnée
+   * 
+   * @param p Panel qui va recevoir la pièce
+   * @param nom nom de la pièce à dessiner 
+   */
+    private void dessinePiece(JPanel p, String nom){        
+        String nomComplet = "icons/" + nom + ".png";
+        //java.net.URL imgURL = getClass().getResource(nomComplet);
+        ClassLoader cl = this.getClass().getClassLoader();
+        JLabel piece = new JLabel(new ImageIcon(cl.getResource(nomComplet)));        
+        p.add(piece);
+    }
+  
+  
     /** Dessine intégralement toutes les pièces de l'échiquier */
     private void dessineToutesLesPieces(){
                // dessin des pièces
@@ -72,17 +86,12 @@ public class YetAnotherChessGame extends JFrame implements MouseListener, MouseM
                 Piece p = ech.getPieceCase(i, 8-j-1);
                 
                 if (p != null) {
-                                        
-                    String nom = p.getNom();
-                    String nomComplet = "icons/" + nom + ".png";
-                    //java.net.URL imgURL = getClass().getResource(nomComplet);
-                    ClassLoader cl = this.getClass().getClassLoader();
-                    JLabel piece = new JLabel(new ImageIcon(cl.getResource(nomComplet)));
+
                     JPanel panel = (JPanel) chessBoard.getComponent(j * ech.getDimX() + i);
-                    panel.add(piece);
+                    dessinePiece(panel,p.getNom());
                 }
             }
-        } 
+        }                 
     }
     
     
