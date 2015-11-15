@@ -326,8 +326,21 @@ public class Echiquier{
         return res;
     }
    
-    
-
+    /** Méthode qui permet de savoir si un déplacement implique une promotion
+     * (sans exécuter ce déplacement)
+     * 
+     * @param d un déplacemement 
+     * @return vrai si c'est une promotion faux sinon.
+     * 
+     */
+    public boolean estPromotion(Deplacement d){
+        char pieceDeplace = getPieceCase(d.getDepart()).getCode();
+        
+        return ((pieceDeplace == 'P' && d.getY2() == 7) 
+                || (pieceDeplace == 'p' && d.getY2() == 0));
+        
+        
+    }
 
     /**
      * Méthode qui indique si un déplacement est valide ou non. La méthode indique
@@ -1110,14 +1123,14 @@ public class Echiquier{
     }
 
     /**
-     * Indique si le dernier mouvement est une promotion
+     * Indique si le dernier mouvement exécuté est une promotion
      * @return vrai si le dernier mouvement est une promotion
      */
     public boolean isPromotion() {
         return promotion;
     }
 
-    /** Indique si le dernier mouvement est un petit roque
+    /** Indique si le dernier mouvement exécuté est un petit roque
      * 
      * @return vrai si le dernier mouvement était un petit roque
      */
@@ -1126,7 +1139,7 @@ public class Echiquier{
     }
     
     
-    /** Indique si le dernier mouvement est un grand roque
+    /** Indique si le dernier mouvement exécuté est un grand roque
      * 
      * @return vrai si le dernier mouvement était un grand roque
      */
@@ -1136,7 +1149,7 @@ public class Echiquier{
     
     
     /**
-     * Indique si le dernier mouvement est une prise en passant
+     * Indique si le dernier mouvement exécuté  est une prise en passant
      * @return vrai si le dermier mouvement était une prise en passant
      */
     public boolean priseEnPassantEnCours(){
