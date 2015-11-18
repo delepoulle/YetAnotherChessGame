@@ -1098,6 +1098,24 @@ public class Echiquier{
         return false;
     }
     
+    
+    /** Indique si le joueur est en échec et mat 
+     * 
+     * @param couleur couleur du joueur
+     * @return vrai si le joueur est mat faux sinon
+     */
+    public boolean estEchecEtMat(char couleur){
+                        
+        if (estEnEchec(couleur)){
+            Position pos = rechercheRoi(couleur);
+            Piece p = getPiece(pos);
+            if (p.getAccessible().isEmpty()){
+                return true;
+            }            
+        }
+        return false;
+    }
+    
     /**
      * Recherche la position du roi d'une couleur (on suppose qu'il y a
      * un et un seul roi).
