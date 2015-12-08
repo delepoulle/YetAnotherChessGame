@@ -476,7 +476,7 @@ public class Echiquier{
             }
             
             // cas de la prise en passant 
-            if (Character.toUpperCase(codePiece) =='P' && y1!=y2 && c[x2][y2].estVide() ){
+            if (Character.toUpperCase(codePiece) =='P' && x1!=x2 && c[x2][y2].estVide() ){
                 
                 priseEnPassantEnCours = true;
                 
